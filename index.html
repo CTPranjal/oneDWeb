@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OneD Demo</title>
+  <meta name="description" content="Demo site for OneD with CleverTap Native Display banner and OTT-style browsing UI." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #0b0b0f;        /* deep near-black */
+      --panel:#111117;      /* card panels */
+      --muted:#a3a3ad;      /* secondary text */
+      --text:#f5f6fa;       /* primary text */
+      --accent:#6d7cff;     /* bluish accent */
+      --accent-2:#a855f7;   /* purple accent */
+      --chip:#1a1a22;       /* chips */
+      --card:#14141c;
+      --border:#232333;
+      --row-gap: 24px;
+      --radius-xl: 18px;
+      --radius-lg: 14px;
+      --radius-md: 12px;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+    * { box-sizing: border-box }
+    html, body { height: 100% }
+    body{
+      margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color: var(--text); background: radial-gradient(1200px 600px at 70% -80%, rgba(109,124,255,.08), transparent),
+      radial-gradient(1000px 500px at 20% -60%, rgba(168,85,247,.06), transparent), var(--bg);
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    }
+    a { color: inherit; text-decoration: none }
+    .container{ max-width: 1240px; margin: 0 auto; padding: 0 20px }
+
+    /* Header */
+    header{ position: sticky; top:0; z-index:50; backdrop-filter: blur(10px);
+      background: linear-gradient(180deg, rgba(11,11,15,.92), rgba(11,11,15,.80) 60%, rgba(11,11,15,0));
+      border-bottom: 1px solid rgba(255,255,255,.04);
+    }
+    .nav{ display:flex; align-items:center; justify-content:space-between; padding: 14px 0 }
+    .brand{ display:flex; align-items:center; gap:10px; font-weight: 800; letter-spacing:.3px }
+    .logo{ width:34px; height:34px; border-radius:10px; background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      display:grid; place-items:center; box-shadow: var(--shadow); font-size: 18px; font-weight:900 }
+    .logo span{ transform: translateY(-1px) }
+    .menu{ display:flex; align-items:center; gap:16px; color: var(--muted); font-weight:500 }
+    .menu a{ padding: 8px 10px; border-radius: 10px }
+    .menu a.active, .menu a:hover{ color: var(--text); background: var(--chip); }
+    .actions{ display:flex; align-items:center; gap:10px }
+    .search{ background: var(--chip); border:1px solid var(--border); border-radius: 12px; padding: 8px 12px; display:flex; gap:8px; align-items:center; color: var(--muted) }
+    .btn{ background: linear-gradient(135deg, var(--accent), var(--accent-2)); color:#0b0b0f; border:none; padding:10px 14px; border-radius:12px; font-weight:700; box-shadow: var(--shadow) }
+
+    /* Hero / CleverTap Native Display slot */
+    .hero{ position: relative; margin-top: 10px; }
+    .banner{ position: relative; overflow:hidden; border-radius: var(--radius-xl); background: var(--panel); border:1px solid var(--border) }
+    .banner img{ width:100%; display:block; aspect-ratio: 16/6; object-fit: cover; filter: saturate(1.05) contrast(1.02) }
+    .banner-overlay{ position:absolute; inset:0; display:flex; align-items:flex-end; justify-content:space-between; padding: 22px; background: linear-gradient(180deg, transparent, rgba(0,0,0,.2) 40%, rgba(0,0,0,.55)); }
+    .banner-copy{ max-width: 60% }
+    .banner h1{ margin:0 0 6px; font-size: clamp(20px, 4vw, 34px) }
+    .banner p{ margin:0; color: var(--muted) }
+    .banner-cta{ display:flex; gap:10px }
+
+    /* Rows */
+    section{ margin: 26px 0 }
+    .row-head{ display:flex; align-items:baseline; justify-content:space-between; margin: 0 6px 10px }
+    .row-title{ font-weight:800; letter-spacing:.2px }
+    .scroller{ display:grid; grid-auto-flow: column; grid-auto-columns: minmax(180px, 1fr); gap: 12px; overflow-x:auto; padding-bottom: 6px; scrollbar-width: thin }
+    .card{ position:relative; background: var(--card); border:1px solid var(--border); border-radius: var(--radius-lg); overflow:hidden }
+    .thumb{ width:100%; display:block; aspect-ratio: 16/9; object-fit: cover }
+    .badge{ position:absolute; top:8px; left:8px; background: rgba(0,0,0,.65); color:#fff; padding:4px 8px; font-size:12px; border-radius: 999px; border:1px solid rgba(255,255,255,.15) }
+    .title{ padding: 8px 10px 10px; font-size: 14px; color: #e7e7ef }
+    .progress{ position:absolute; left:0; right:0; bottom:0; height:4px; background: rgba(255,255,255,.08) }
+    .progress > i{ display:block; height:100%; background: linear-gradient(90deg, var(--accent), var(--accent-2)) }
+
+    /* Player page */
+    .player-wrap{ display:grid; gap: 16px; grid-template-columns: 1.2fr .8fr }
+    .player{
+      background: #07070a; border:1px solid var(--border); border-radius: var(--radius-xl); overflow:hidden; position:relative
+    }
+    .player .poster{ width:100%; display:block; aspect-ratio: 16/9; object-fit: cover; filter: saturate(1.05) }
+    .player .controls{ position:absolute; inset:auto 0 0 0; padding: 12px 14px; background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.7)); }
+    .control-bar{ display:flex; align-items:center; gap: 10px }
+    .play{ width: 42px; height:42px; border-radius: 999px; border: 2px solid rgba(255,255,255,.35); display:grid; place-items:center; font-weight:800 }
+    .seek{ flex:1; height:6px; background: rgba(255,255,255,.2); border-radius: 6px; overflow:hidden }
+    .seek>i{ display:block; height:100%; width: 38%; background: linear-gradient(90deg, var(--accent), var(--accent-2)) }
+    .meta{ padding: 8px 2px; color: var(--muted) }
+
+    .aside{ display:grid; gap: 12px }
+    .pill{ display:inline-flex; gap:8px; align-items:center; background: var(--chip); border:1px solid var(--border); padding:8px 12px; border-radius: 999px; color: var(--muted); font-size: 13px }
+
+    .hstack{ display:flex; gap:8px; align-items:center }
+    .vstack{ display:grid; gap:10px }
+
+    /* Footer */
+    footer{ margin: 40px 0 30px; color: var(--muted); font-size: 13px }
+
+    /* Small screens */
+    @media (max-width: 900px){
+      .player-wrap{ grid-template-columns: 1fr }
+      .banner-copy{ max-width: 100% }
+      .menu{ display:none }
+    }
+  </style>
+
+  <!-- CleverTap Web SDK (placeholder config) -->
+  <script>
+    // Replace YOUR_ACCOUNT_ID with OneD demo/project id
+    var clevertap = {event:[], profile:[], account:[], onUserLogin:[], notifications:[], privacy:[]};
+    clevertap.account.push({"id":"489-7K5-676Z"});
+    clevertap.privacy.push({optOut: false});
+    clevertap.privacy.push({useIP: false});
+    (function () {
+      var wzrk = document.createElement('script'); wzrk.type = 'text/javascript'; wzrk.async = true;
+      wzrk.src = 'https://cdn.clevertap.com/js/clevertap.min.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(wzrk, s);
+    })();
+  </script>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="./">
+        <div class="logo"><span>1D</span></div>
+        <div>OneD</div>
+      </a>
+      <nav class="menu">
+        <a class="active" href="#">Home</a>
+        <a href="#">Movies</a>
+        <a href="#">Series</a>
+        <a href="#">Kids</a>
+      </nav>
+      <div class="actions">
+        <div class="search">🔎 <span>Search</span></div>
+        <button class="btn">Sign In</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="app" class="container" aria-live="polite"></main>
+
+  <footer class="container">
+    © <span id="yr"></span> OneD (Demo). For presentation use only.
+  </footer>
+
+  <script>
+    // --- Demo dataset (use any images/URLs you like) ---
+    const items = [
+      {
+        id: 'aurora',
+        title: 'Aurora Nights',
+        tag: 'New',
+        thumb: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1400&auto=format&fit=crop',
+        hero: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop',
+        progress: 72
+      },
+      {
+        id: 'sahara',
+        title: 'Sahara Drift',
+        tag: 'Trending',
+        thumb: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1200&auto=format&fit=crop',
+        hero: 'https://images.unsplash.com/photo-1519682337058-a94d519337bc?q=80&w=1600&auto=format&fit=crop',
+        progress: 24
+      },
+      {
+        id: 'city',
+        title: 'Neon City',
+        tag: '4K',
+        thumb: 'https://images.unsplash.com/photo-1491553895911-0055eca6402d?q=80&w=1400&auto=format&fit=crop',
+        hero: 'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?q=80&w=1600&auto=format&fit=crop',
+        progress: 46
+      },
+      {
+        id: 'ocean',
+        title: 'Ocean Depths',
+        tag: 'Dolby',
+        thumb: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1400&auto=format&fit=crop',
+        hero: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1600&auto=format&fit=crop',
+        progress: 12
+      },
+      {
+        id: 'mount',
+        title: 'Summit Day',
+        tag: 'Top 10',
+        thumb: 'https://images.unsplash.com/photo-1482192596544-9eb780fc7f66?q=80&w=1400&auto=format&fit=crop',
+        hero: 'https://images.unsplash.com/photo-1482192596544-9eb780fc7f66?q=80&w=1600&auto=format&fit=crop',
+        progress: 88
+      },
+      {
+        id: 'forest',
+        title: 'Whispering Woods',
+        tag: 'New Ep',
+        thumb: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1400&auto=format&fit=crop',
+        hero: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop',
+        progress: 55
+      }
+    ];
+
+    // Utility
+    const q = sel => document.querySelector(sel);
+    const byId = id => items.find(x => x.id === id);
+
+    function goToWatch(id){
+      const url = new URL(window.location);
+      url.searchParams.set('watch', id);
+      window.history.pushState({}, '', url);
+      render();
+    }
+
+    // --- CleverTap Native Display banner slot ---
+    // In production: Configure a Web Native Display campaign that targets this slot.
+    // Option A: use a container with selector and let CT inject creative.
+    // Option B: for the demo, we show a rotating fallback if CT isn't loaded yet.
+
+    const demoBanners = [
+      'https://images.unsplash.com/photo-1526948128573-703ee1aeb6fa?q=80&w=2000&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1505685296765-3a2736de412f?q=80&w=2000&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1521295121783-8a321d551ad2?q=80&w=2000&auto=format&fit=crop'
+    ];
+
+    function renderBanner(container){
+      const imgSrc = demoBanners[Math.floor(Math.random()*demoBanners.length)];
+      container.innerHTML = `
+        <div class="banner" id="ct-native-banner" data-clevertap-native-display>
+          <img src="${imgSrc}" alt="Featured"/>
+          <div class="banner-overlay container">
+            <div class="banner-copy">
+              <h1>Tonight on OneD</h1>
+              <p>Personalised pick just for you · Powered by CleverTap Native Display</p>
+            </div>
+            <div class="banner-cta">
+              <button class="btn" onclick="goToWatch('${items[0].id}')">Play</button>
+              <a class="pill" href="#">＋ My List</a>
+            </div>
+          </div>
+        </div>`;
+    }
+
+    // --- Home page ---
+    function Home(){
+      const el = document.createElement('div');
+      el.className = 'home';
+      el.innerHTML = `
+        <div class="hero"><div id="banner-slot"></div></div>
+
+        <section>
+          <div class="row-head"><div class="row-title">OneD Recommends</div></div>
+          <div class="scroller" id="row-reco"></div>
+        </section>
+
+        <section>
+          <div class="row-head"><div class="row-title">Continue Watching</div></div>
+          <div class="scroller" id="row-continue"></div>
+        </section>
+
+        <section>
+          <div class="row-head"><div class="row-title">New & Trending</div></div>
+          <div class="scroller" id="row-trending"></div>
+        </section>
+      `;
+
+      // Banner
+      renderBanner(el.querySelector('#banner-slot'));
+
+      // Rows
+      const makeCard = (it, showProgress=false) => {
+        const card = document.createElement('a');
+        card.className = 'card';
+        card.href = 'javascript:void(0)';
+        card.onclick = () => goToWatch(it.id);
+        card.innerHTML = `
+          <span class="badge">${it.tag}</span>
+          <img class="thumb" loading="lazy" src="${it.thumb}" alt="${it.title}">
+          <div class="title">${it.title}</div>
+          ${showProgress ? `<div class=progress><i style="width:${it.progress}%"></i></div>`: ''}
+        `;
+        return card;
+      };
+
+      const reco = el.querySelector('#row-reco');
+      const cont = el.querySelector('#row-continue');
+      const trend = el.querySelector('#row-trending');
+
+      items.forEach((it,i)=> reco.appendChild(makeCard(it)));
+      items.slice().reverse().forEach(it=> cont.appendChild(makeCard(it,true)));
+      items.sort((a,b)=> a.title.localeCompare(b.title)).forEach(it=> trend.appendChild(makeCard(it)));
+
+      return el;
+    }
+
+    // --- Watch page ---
+    function Watch(id){
+      const it = byId(id) || items[0];
+      const el = document.createElement('div');
+      el.className = 'watch';
+      el.innerHTML = `
+        <section class="player-wrap">
+          <div>
+            <div class="player">
+              <img class="poster" src="${it.hero}" alt="${it.title}">
+              <div class="controls">
+                <div class="control-bar">
+                  <div class="play">▶</div>
+                  <div class="seek"><i style="width:${Math.max(18, it.progress || 35)}%"></i></div>
+                  <div class="pill">⏱ 1:24:03</div>
+                  <div class="pill">⚙️ HD</div>
+                </div>
+              </div>
+            </div>
+            <div class="meta hstack" style="justify-content:space-between">
+              <div class="hstack" style="gap:12px">
+                <span class="pill">⭐ 8.4</span>
+                <span class="pill">12+</span>
+                <span class="pill">Action</span>
+              </div>
+              <a class="pill" href="./">⟵ Back to Home</a>
+            </div>
+
+            <section>
+              <div class="row-head"><div class="row-title">More to Watch</div></div>
+              <div class="scroller" id="row-more"></div>
+            </section>
+          </div>
+
+          <aside class="aside">
+            <div class="vstack">
+              <div class="row-title">About</div>
+              <div style="color:var(--muted)">A static demo player image with faux controls to simulate playback. Ideal for showcasing CleverTap journeys and Native Display.</div>
+            </div>
+            <div class="vstack">
+              <div class="row-title">Tags</div>
+              <div class="hstack" style="flex-wrap:wrap">
+                <span class="pill">Personalised</span>
+                <span class="pill">Recommended</span>
+                <span class="pill">Top Picks</span>
+                <span class="pill">New</span>
+              </div>
+            </div>
+          </aside>
+        </section>
+      `;
+
+      const more = el.querySelector('#row-more');
+      items.filter(x=> x.id !== it.id).forEach(x=>{
+        const a = document.createElement('a');
+        a.className = 'card';
+        a.href = 'javascript:void(0)';
+        a.onclick = () => goToWatch(x.id);
+        a.innerHTML = `
+          <span class="badge">${x.tag}</span>
+          <img class="thumb" loading="lazy" src="${x.thumb}" alt="${x.title}">
+          <div class="title">${x.title}</div>`;
+        more.appendChild(a);
+      });
+
+      return el;
+    }
+
+    // --- Router (single-file app) ---
+    function render(){
+      const app = q('#app');
+      app.innerHTML = '';
+      const params = new URLSearchParams(location.search);
+      const watchId = params.get('watch');
+      app.appendChild(watchId ? Watch(watchId) : Home());
+    }
+
+    window.addEventListener('popstate', render);
+    document.addEventListener('DOMContentLoaded', ()=>{
+      render();
+      // footer year
+      q('#yr').textContent = new Date().getFullYear();
+
+      // Example CleverTap events you might fire during the demo
+      try{
+        clevertap.event.push("Page Viewed", { page: location.search.includes('watch=') ? 'Watch' : 'Home' });
+      }catch(e){ /* no-op for demo */ }
+    });
+  </script>
+</body>
+</html>
