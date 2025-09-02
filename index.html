@@ -11,6 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet">
+
   <style>
     :root {
       --bg: #0b0b0f;
@@ -465,7 +466,16 @@
   <footer class="container">
     © <span id="yr"></span> OneD (Demo). For presentation use only.
   </footer>
-
+<script>
+            clevertap.notifications.push({
+				  "titleText":'Would you like to receive Push Notifications?',
+				  "bodyText":'We promise to only send you relevant content and give you updates on your transactions',
+				  "okButtonText":'Sign me up!',
+				  "rejectButtonText":'No thanks',
+				  "okButtonColor":'#778046',
+                  "serviceWorkerPath": 'js/clevertap_sw.js'
+});
+        </script>
   <script>
     const oneDRecommended = [
       {
