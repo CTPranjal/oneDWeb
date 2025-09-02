@@ -1,138 +1,443 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>OneD Demo</title>
-  <meta name="description" content="Demo site for OneD with CleverTap Native Display banner and OTT-style browsing UI." />
+  <meta name="description"
+    content="Demo site for OneD with CleverTap Native Display banner and OTT-style browsing UI." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
   <style>
-    
-    :root{
-      --bg: #0b0b0f;        /* deep near-black */
-      --panel:#111117;      /* card panels */
-      --muted:#a3a3ad;      /* secondary text */
-      --text:#f5f6fa;       /* primary text */
-      --accent:#6d7cff;     /* bluish accent */
-      --accent-2:#a855f7;   /* purple accent */
-      --chip:#1a1a22;       /* chips */
-      --card:#14141c;
-      --border:#232333;
+    :root {
+      --bg: #0b0b0f;
+      /* deep near-black */
+      --panel: #111117;
+      /* card panels */
+      --muted: #a3a3ad;
+      /* secondary text */
+      --text: #f5f6fa;
+      /* primary text */
+      --accent: #6d7cff;
+      /* bluish accent */
+      --accent-2: #a855f7;
+      /* purple accent */
+      --chip: #1a1a22;
+      /* chips */
+      --card: #14141c;
+      --border: #232333;
       --row-gap: 24px;
       --radius-xl: 18px;
       --radius-lg: 14px;
       --radius-md: 12px;
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --shadow: 0 10px 30px rgba(0, 0, 0, .35);
     }
-    * { box-sizing: border-box }
-    html, body { height: 100% }
-    body{
-      margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      color: var(--text); background: radial-gradient(1200px 600px at 70% -80%, rgba(109,124,255,.08), transparent),
-      radial-gradient(1000px 500px at 20% -60%, rgba(168,85,247,.06), transparent), var(--bg);
-      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+
+    * {
+      box-sizing: border-box
     }
-    a { color: inherit; text-decoration: none }
-    .container{ max-width: 1240px; margin: 0 auto; padding: 0 20px }
+
+    html,
+    body {
+      height: 100%
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text);
+      background: radial-gradient(1200px 600px at 70% -80%, rgba(109, 124, 255, .08), transparent),
+        radial-gradient(1000px 500px at 20% -60%, rgba(168, 85, 247, .06), transparent), var(--bg);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none
+    }
+
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 20px
+    }
 
     /* Header */
-    header{ position: sticky; top:0; z-index:50; backdrop-filter: blur(10px);
-      background: linear-gradient(180deg, rgba(11,11,15,.92), rgba(11,11,15,.80) 60%, rgba(11,11,15,0));
-      border-bottom: 1px solid rgba(255,255,255,.04);
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(180deg, rgba(11, 11, 15, .92), rgba(11, 11, 15, .80) 60%, rgba(11, 11, 15, 0));
+      border-bottom: 1px solid rgba(255, 255, 255, .04);
     }
-    .nav{ display:flex; align-items:center; justify-content:space-between; padding: 14px 0 }
-    .brand{ display:flex; align-items:center; gap:10px; font-weight: 800; letter-spacing:.3px }
-    .logo{ width:34px; height:34px; border-radius:10px; background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      display:grid; place-items:center; box-shadow: var(--shadow); font-size: 18px; font-weight:900 }
-    .logo span{ transform: translateY(-1px) }
-    .menu{ display:flex; align-items:center; gap:16px; color: var(--muted); font-weight:500 }
-    .menu a{ padding: 8px 10px; border-radius: 10px }
-    .menu a.active, .menu a:hover{ color: var(--text); background: var(--chip); }
-    .actions{ display:flex; align-items:center; gap:10px }
-    .search{ background: var(--chip); border:1px solid var(--border); border-radius: 12px; padding: 8px 12px; display:flex; gap:8px; align-items:center; color: var(--muted) }
-    .btn{ background: linear-gradient(135deg, var(--accent), var(--accent-2)); color:#0b0b0f; border:none; padding:10px 14px; border-radius:12px; font-weight:700; box-shadow: var(--shadow) }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      letter-spacing: .3px
+    }
+
+    .logo {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      display: grid;
+      place-items: center;
+      box-shadow: var(--shadow);
+      font-size: 18px;
+      font-weight: 900
+    }
+
+    .logo span {
+      transform: translateY(-1px)
+    }
+
+    .menu {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: var(--muted);
+      font-weight: 500
+    }
+
+    .menu a {
+      padding: 8px 10px;
+      border-radius: 10px
+    }
+
+    .menu a.active,
+    .menu a:hover {
+      color: var(--text);
+      background: var(--chip);
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .search {
+      background: var(--chip);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 8px 12px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      color: var(--muted)
+    }
+
+    .btn {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #0b0b0f;
+      border: none;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-weight: 700;
+      box-shadow: var(--shadow)
+    }
 
     /* Hero / CleverTap Native Display slot */
-    .hero{ position: relative; margin-top: 10px; }
-    .banner{ position: relative; overflow:hidden; border-radius: var(--radius-xl); background: var(--panel); border:1px solid var(--border) }
-    .banner img{ width:100%; display:block; aspect-ratio: 16/6; object-fit: cover; filter: saturate(1.05) contrast(1.02) }
-    .banner-overlay{ position:absolute; inset:0; display:flex; align-items:flex-end; justify-content:space-between; padding: 22px; background: linear-gradient(180deg, transparent, rgba(0,0,0,.2) 40%, rgba(0,0,0,.55)); }
-    .banner-copy{ max-width: 60% }
-    .banner h1{ margin:0 0 6px; font-size: clamp(20px, 4vw, 34px) }
-    .banner p{ margin:0; color: var(--muted) }
-    .banner-cta{ display:flex; gap:10px }
+    .hero {
+      position: relative;
+      margin-top: 10px;
+    }
+
+    .banner {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-xl);
+      background: var(--panel);
+      border: 1px solid var(--border);
+      opacity: 0;
+      transform: scale(1.02);
+      animation: fadeIn 0.8s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(1.02);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .banner img {
+      width: 100%;
+      display: block;
+      aspect-ratio: 16/6;
+      object-fit: cover;
+      filter: saturate(1.05) contrast(1.02)
+    }
+
+    .banner-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding: 22px;
+      background: linear-gradient(180deg, transparent, rgba(0, 0, 0, .2) 40%, rgba(0, 0, 0, .55));
+    }
+
+    .banner-copy {
+      max-width: 60%
+    }
+
+    .banner h1 {
+      margin: 0 0 6px;
+      font-size: clamp(20px, 4vw, 34px)
+    }
+
+    .banner p {
+      margin: 0;
+      color: var(--muted)
+    }
+
+    .banner-cta {
+      display: flex;
+      gap: 10px
+    }
 
     /* Rows */
-    section{ margin: 26px 0 }
-    .row-head{ display:flex; align-items:baseline; justify-content:space-between; margin: 0 6px 10px }
-    .row-title{ font-weight:800; letter-spacing:.2px }
-    .scroller{ display:grid; grid-auto-flow: column; grid-auto-columns: minmax(180px, 1fr); gap: 12px; overflow-x:auto; padding-bottom: 6px; scrollbar-width: thin }
-    .card{ position:relative; background: var(--card); border:1px solid var(--border); border-radius: var(--radius-lg); overflow:hidden }
-    .thumb{ width:100%; display:block; aspect-ratio: 16/9; object-fit: cover }
-    .badge{ position:absolute; top:8px; left:8px; background: rgba(0,0,0,.65); color:#fff; padding:4px 8px; font-size:12px; border-radius: 999px; border:1px solid rgba(255,255,255,.15) }
-    .title{ padding: 8px 10px 10px; font-size: 14px; color: #e7e7ef }
-    .progress{ position:absolute; left:0; right:0; bottom:0; height:4px; background: rgba(255,255,255,.08) }
-    .progress > i{ display:block; height:100%; background: linear-gradient(90deg, var(--accent), var(--accent-2)) }
+    section {
+      margin: 26px 0
+    }
+
+    .row-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin: 0 6px 10px
+    }
+
+    .row-title {
+      font-weight: 800;
+      letter-spacing: .2px
+    }
+
+    .scroller {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(180px, 1fr);
+      gap: 12px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      scrollbar-width: thin
+    }
+
+    .card {
+      position: relative;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden
+    }
+
+    .thumb {
+      width: 100%;
+      display: block;
+      aspect-ratio: 16/9;
+      object-fit: cover
+    }
+
+    .badge {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: rgba(0, 0, 0, .65);
+      color: #fff;
+      padding: 4px 8px;
+      font-size: 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, .15)
+    }
+
+    .title {
+      padding: 8px 10px 10px;
+      font-size: 14px;
+      color: #e7e7ef
+    }
+
+    .progress {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 4px;
+      background: rgba(255, 255, 255, .08)
+    }
+
+    .progress>i {
+      display: block;
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2))
+    }
 
     /* Player page */
-    .player-wrap{ display:grid; gap: 16px; grid-template-columns: 1.2fr .8fr }
-    .player{
-      background: #07070a; border:1px solid var(--border); border-radius: var(--radius-xl); overflow:hidden; position:relative
+    .player-wrap {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: 1.2fr .8fr
     }
-    .player .poster{ width:100%; display:block; aspect-ratio: 16/9; object-fit: cover; filter: saturate(1.05) }
-    .player .controls{ position:absolute; inset:auto 0 0 0; padding: 12px 14px; background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.7)); }
-    .control-bar{ display:flex; align-items:center; gap: 10px }
-    .play{ width: 42px; height:42px; border-radius: 999px; border: 2px solid rgba(255,255,255,.35); display:grid; place-items:center; font-weight:800 }
-    .seek{ flex:1; height:6px; background: rgba(255,255,255,.2); border-radius: 6px; overflow:hidden }
-    .seek>i{ display:block; height:100%; width: 38%; background: linear-gradient(90deg, var(--accent), var(--accent-2)) }
-    .meta{ padding: 8px 2px; color: var(--muted) }
 
-    .aside{ display:grid; gap: 12px }
-    .pill{ display:inline-flex; gap:8px; align-items:center; background: var(--chip); border:1px solid var(--border); padding:8px 12px; border-radius: 999px; color: var(--muted); font-size: 13px }
+    .player {
+      background: #07070a;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      position: relative
+    }
 
-    .hstack{ display:flex; gap:8px; align-items:center }
-    .vstack{ display:grid; gap:10px }
+    .player .poster {
+      width: 100%;
+      display: block;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      filter: saturate(1.05)
+    }
+
+    .player .controls {
+      position: absolute;
+      inset: auto 0 0 0;
+      padding: 12px 14px;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, .7));
+    }
+
+    .control-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .play {
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      border: 2px solid rgba(255, 255, 255, .35);
+      display: grid;
+      place-items: center;
+      font-weight: 800
+    }
+
+    .seek {
+      flex: 1;
+      height: 6px;
+      background: rgba(255, 255, 255, .2);
+      border-radius: 6px;
+      overflow: hidden
+    }
+
+    .seek>i {
+      display: block;
+      height: 100%;
+      width: 38%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2))
+    }
+
+    .meta {
+      padding: 8px 2px;
+      color: var(--muted)
+    }
+
+    .aside {
+      display: grid;
+      gap: 12px
+    }
+
+    .pill {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      background: var(--chip);
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 13px
+    }
+
+    .hstack {
+      display: flex;
+      gap: 8px;
+      align-items: center
+    }
+
+    .vstack {
+      display: grid;
+      gap: 10px
+    }
 
     /* Footer */
-    footer{ margin: 40px 0 30px; color: var(--muted); font-size: 13px }
+    footer {
+      margin: 40px 0 30px;
+      color: var(--muted);
+      font-size: 13px
+    }
 
     /* Small screens */
-    @media (max-width: 900px){
-      .player-wrap{ grid-template-columns: 1fr }
-      .banner-copy{ max-width: 100% }
-      .menu{ display:none }
+    @media (max-width: 900px) {
+      .player-wrap {
+        grid-template-columns: 1fr
+      }
+
+      .banner-copy {
+        max-width: 100%
+      }
+
+      .menu {
+        display: none
+      }
     }
   </style>
 
-      <script type="text/javascript">
-        // Initialize CleverTap object
-        var clevertap = { event: [], profile: [], account: [], onUserLogin: [], notifications: [], privacy: [] };
+  <script type="text/javascript">
+    // Initialize CleverTap object
+    var clevertap = { event: [], profile: [], account: [], onUserLogin: [], notifications: [], privacy: [] };
 
-        // Replace with your CleverTap account ID and region
-        clevertap.account.push({ "id": "TEST-489-7K5-676Z", "region": "eu1" });
-        // clevertap.setLogLevel(3);
-        clevertap.privacy.push({ optOut: false }); // User has not opted out of data sharing
-        clevertap.privacy.push({ useIP: false }); // Do not use IP for data
+    // Replace with your CleverTap account ID and region
+    clevertap.account.push({ "id": "TEST-489-7K5-676Z", "region": "eu1" });
+    // clevertap.setLogLevel(3);
+    clevertap.privacy.push({ optOut: false }); // User has not opted out of data sharing
+    clevertap.privacy.push({ useIP: false }); // Do not use IP for data
 
 
-        
-        // Load CleverTap SDK
-        (function () {
-            var wzrk = document.createElement('script');
-            wzrk.type = 'text/javascript';
-            wzrk.async = true;
-            wzrk.src = 'https://d2r1yp2w7bby2u.cloudfront.net/js/clevertap.min.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(wzrk, s);
-        })();
-        // clevertap.setLogLevel(3);
+
+    // Load CleverTap SDK
+    (function () {
+      var wzrk = document.createElement('script');
+      wzrk.type = 'text/javascript';
+      wzrk.async = true;
+      wzrk.src = 'https://d2r1yp2w7bby2u.cloudfront.net/js/clevertap.min.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(wzrk, s);
+    })();
+    // clevertap.setLogLevel(3);
 
     // document.addEventListener("CT_web_native_display", function(event) {
     //     console.log("key value " + event);
     // });
-    </script>
+  </script>
 </head>
 
 <body>
@@ -162,7 +467,7 @@
   </footer>
 
   <script>
-     const oneDRecommended = [
+    const oneDRecommended = [
       {
         id: 'volcano',
         title: 'Volcano Rising',
@@ -193,7 +498,7 @@
         thumb: 'https://cf-images.ap-southeast-1.prod.boltdns.net/v1/static/6415566492001/09e05d7f-72e8-45fe-9075-9e4dc6d34942/cdd5da80-3948-4cdd-9b96-c4f843bd2bb0/720x1280/match/image.jpg',
         hero: 'https://cf-images.ap-southeast-1.prod.boltdns.net/v1/static/6415566492001/09e05d7f-72e8-45fe-9075-9e4dc6d34942/cdd5da80-3948-4cdd-9b96-c4f843bd2bb0/720x1280/match/image.jpg',
         progress: 12
-      },  {
+      }, {
         id: 'aurora',
         title: 'Aurora Nights',
         tag: 'New',
@@ -300,7 +605,7 @@
     const q = sel => document.querySelector(sel);
     const byId = id => items.find(x => x.id === id);
 
-    function goToWatch(id){
+    function goToWatch(id) {
       const url = new URL(window.location);
       url.searchParams.set('watch', id);
       window.history.pushState({}, '', url);
@@ -317,35 +622,24 @@
       // 'https://images.unsplash.com/photo-1505685296765-3a2736de412f?q=80&w=2000&auto=format&fit=crop',
       // 'https://images.unsplash.com/photo-1521295121783-8a321d551ad2?q=80&w=2000&auto=format&fit=crop'
     ];
-    
-    function renderBanner(container){
-     clevertap.event.push("Web Event", {});
-          // Trigger CleverTap native display with the target div and event-based content
-      clevertap.notifications.push({
-          type: "wzrk_native_display", // Native display type
-          targetDivId: "ct-nativedisplay", // Target div for display
-      });
 
-    clevertap.event.push("t3", {});
+    function renderBanner(container) {
+  let index = 0;
 
-    // console.log("Henil test");
-    document.addEventListener("CT_web_native_display", function (event) {
+  function showBanner() {
+    const imgSrc = demoBanners.length
+      ? demoBanners[index % demoBanners.length] // loop over banners
+      : items[0].hero;
 
-          console.log("pranjals event"+ event);
-           const data = event.detail;
-    const topic = data?.kv?.topic;
-    console.log("Received Native Display Event:", data);
-    });
+    const img = new Image();
+    img.src = imgSrc;
 
-
-      const imgSrc = demoBanners[Math.floor(Math.random()*demoBanners.length)];
+    img.onload = () => {
       container.innerHTML = `
         <div class="banner" id="ct" data-clevertap-native-display>
           <div id="ct-nativedisplay">
-           <img src="${imgSrc}" alt="Featured"/>
+            <img src="${imgSrc}" alt="Featured"/>
           </div>
-
-         
           <div class="banner-overlay container">
             <div class="banner-copy">
               <h1>Tonight on OneD</h1>
@@ -357,7 +651,18 @@
             </div>
           </div>
         </div>`;
-    }
+    };
+
+    index++;
+  }
+
+  // show first banner immediately
+  showBanner();
+
+  // rotate every 7 seconds (adjust 5000–10000 for 5–10s)
+  setInterval(showBanner, 7000);
+}
+
     function getRandomItems(arr, num) {
       const shuffled = [...arr].sort(() => 0.5 - Math.random());
       return shuffled.slice(0, num);
@@ -365,7 +670,7 @@
 
 
     // --- Home page ---
-    function Home(){
+    function Home() {
       const el = document.createElement('div');
       el.className = 'home';
       el.innerHTML = `
@@ -391,7 +696,7 @@
       renderBanner(el.querySelector('#banner-slot'));
 
       // Rows
-      const makeCard = (it, showProgress=false) => {
+      const makeCard = (it, showProgress = false) => {
         const card = document.createElement('a');
         card.className = 'card';
         card.href = 'javascript:void(0)';
@@ -400,7 +705,7 @@
           <span class="badge">${it.tag}</span>
           <img class="thumb" loading="lazy" src="${it.thumb}" alt="${it.title}">
           <div class="title">${it.title}</div>
-          ${showProgress ? `<div class=progress><i style="width:${it.progress}%"></i></div>`: ''}
+          ${showProgress ? `<div class=progress><i style="width:${it.progress}%"></i></div>` : ''}
         `;
         return card;
       };
@@ -414,7 +719,7 @@
       const trend = el.querySelector('#row-trending');
 
       // items.forEach((it,i)=> reco.appendChild(makeCard(it)));
-      items.slice().reverse().forEach(it=> cont.appendChild(makeCard(it,true)));
+      items.slice().reverse().forEach(it => cont.appendChild(makeCard(it, true)));
       trendingItems.forEach(it => trend.appendChild(makeCard(it)));
       // oneDRecommended.forEach(it => trend.appendChild(makeCard(it)));
 
@@ -426,7 +731,7 @@
 
 
     // --- Watch page ---
-    function Watch(id){
+    function Watch(id) {
       const it = byId(id) || items[0];
       const el = document.createElement('div');
       el.className = 'watch';
@@ -461,7 +766,7 @@
       `;
 
       const more = el.querySelector('#row-more');
-      items.filter(x=> x.id !== it.id).forEach(x=>{
+      items.filter(x => x.id !== it.id).forEach(x => {
         const a = document.createElement('a');
         a.className = 'card';
         a.href = 'javascript:void(0)';
@@ -477,7 +782,7 @@
     }
 
     // --- Router (single-file app) ---
-    function render(){
+    function render() {
       const app = q('#app');
       app.innerHTML = '';
       const params = new URLSearchParams(location.search);
@@ -486,22 +791,23 @@
     }
 
     window.addEventListener('popstate', render);
-    document.addEventListener('DOMContentLoaded', ()=>{
+    document.addEventListener('DOMContentLoaded', () => {
       render();
       // footer year
       q('#yr').textContent = new Date().getFullYear();
 
       // Example CleverTap events you might fire during the demo
-      try{
+      try {
         clevertap.event.push("Page Viewed", { page: location.search.includes('watch=') ? 'Watch' : 'Home' });
-      }catch(e){ /* no-op for demo */ }
+      } catch (e) { /* no-op for demo */ }
     });
-    document.addEventListener("CT_web_native_display", function(event) {
+    document.addEventListener("CT_web_native_display", function (event) {
       console.log("pranjals event123:", event);
-       const data = event.detail;
-    const topic = data?.kv?.topic;
-    console.log("Received Native Display Event:", data);
+      const data = event.detail;
+      const topic = data?.kv?.topic;
+      console.log("Received Native Display Event:", data);
     });
   </script>
 </body>
+
 </html>
