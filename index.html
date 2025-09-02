@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
+    
     :root{
       --bg: #0b0b0f;        /* deep near-black */
       --panel:#111117;      /* card panels */
@@ -105,20 +106,35 @@
     }
   </style>
 
-  <!-- CleverTap Web SDK (placeholder config) -->
-  <script>
-    // Replace YOUR_ACCOUNT_ID with OneD demo/project id
-    var clevertap = {event:[], profile:[], account:[], onUserLogin:[], notifications:[], privacy:[]};
-    clevertap.account.push({"id":"489-7K5-676Z"});
-    clevertap.privacy.push({optOut: false});
-    clevertap.privacy.push({useIP: false});
-    (function () {
-      var wzrk = document.createElement('script'); wzrk.type = 'text/javascript'; wzrk.async = true;
-      wzrk.src = 'https://cdn.clevertap.com/js/clevertap.min.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(wzrk, s);
-    })();
-  </script>
+      <script type="text/javascript">
+        // Initialize CleverTap object
+        var clevertap = { event: [], profile: [], account: [], onUserLogin: [], notifications: [], privacy: [] };
+
+        // Replace with your CleverTap account ID and region
+        clevertap.account.push({ "id": "TEST-489-7K5-676Z", "region": "eu1" });
+        // clevertap.setLogLevel(3);
+        clevertap.privacy.push({ optOut: false }); // User has not opted out of data sharing
+        clevertap.privacy.push({ useIP: false }); // Do not use IP for data
+
+
+        
+        // Load CleverTap SDK
+        (function () {
+            var wzrk = document.createElement('script');
+            wzrk.type = 'text/javascript';
+            wzrk.async = true;
+            wzrk.src = 'https://d2r1yp2w7bby2u.cloudfront.net/js/clevertap.min.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(wzrk, s);
+        })();
+        // clevertap.setLogLevel(3);
+
+    // document.addEventListener("CT_web_native_display", function(event) {
+    //     console.log("key value " + event);
+    // });
+    </script>
 </head>
+
 <body>
   <header>
     <div class="container nav">
@@ -146,55 +162,40 @@
   </footer>
 
   <script>
+    
     // --- Demo dataset (use any images/URLs you like) ---
     const items = [
       {
         id: 'aurora',
         title: 'Aurora Nights',
         tag: 'New',
-        thumb: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1400&auto=format&fit=crop',
-        hero: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop',
+        thumb: 'https://cf-images.ap-southeast-1.prod.boltdns.net/v1/static/6415628290001/91a7455e-f802-42ea-937f-663c67d0c852/74e8bf45-b63a-4cec-b649-c810e0b3aae9/1280x720/match/image.jpg',
+        hero: 'https://cf-images.ap-southeast-1.prod.boltdns.net/v1/static/6415628290001/91a7455e-f802-42ea-937f-663c67d0c852/74e8bf45-b63a-4cec-b649-c810e0b3aae9/1280x720/match/image.jpg',
         progress: 72
       },
       {
         id: 'sahara',
         title: 'Sahara Drift',
         tag: 'Trending',
-        thumb: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1200&auto=format&fit=crop',
-        hero: 'https://images.unsplash.com/photo-1519682337058-a94d519337bc?q=80&w=1600&auto=format&fit=crop',
+        thumb: 'https://cf-images.ap-southeast-1.prod.boltdns.net/v1/static/6415566492001/75352ca9-940c-4919-b165-5dbf20a48de9/8b26dfbc-7a2d-479f-bfa4-a4600fc3fec4/1280x720/match/image.jpg',
+        hero: 'https://cf-images.ap-southeast-1.prod.boltdns.net/v1/static/6415566492001/75352ca9-940c-4919-b165-5dbf20a48de9/8b26dfbc-7a2d-479f-bfa4-a4600fc3fec4/1280x720/match/image.jpg',
         progress: 24
       },
       {
         id: 'city',
         title: 'Neon City',
         tag: '4K',
-        thumb: 'https://images.unsplash.com/photo-1491553895911-0055eca6402d?q=80&w=1400&auto=format&fit=crop',
-        hero: 'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?q=80&w=1600&auto=format&fit=crop',
+        thumb: 'https://cf-images.ap-southeast-1.prod.boltdns.net/v1/static/6415566492001/e540b649-b6d3-4f55-9408-3a8a37ffd57e/083b1408-f1ab-430e-a200-a9e08d1b94c4/1280x720/match/image.jpg',
+        hero: 'https://cf-images.ap-southeast-1.prod.boltdns.net/v1/static/6415566492001/e540b649-b6d3-4f55-9408-3a8a37ffd57e/083b1408-f1ab-430e-a200-a9e08d1b94c4/1280x720/match/image.jpg',
         progress: 46
       },
       {
         id: 'ocean',
         title: 'Ocean Depths',
         tag: 'Dolby',
-        thumb: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1400&auto=format&fit=crop',
-        hero: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1600&auto=format&fit=crop',
+        thumb: 'https://cf-images.ap-southeast-1.prod.boltdns.net/v1/static/6415566492001/f9089b6b-b0d2-4c1a-9e8a-59fa82217033/8fe47e23-2304-48bd-a5a6-527e4c07dcaa/1280x720/match/image.jpg',
+        hero: 'https://cf-images.ap-southeast-1.prod.boltdns.net/v1/static/6415566492001/f9089b6b-b0d2-4c1a-9e8a-59fa82217033/8fe47e23-2304-48bd-a5a6-527e4c07dcaa/1280x720/match/image.jpg',
         progress: 12
-      },
-      {
-        id: 'mount',
-        title: 'Summit Day',
-        tag: 'Top 10',
-        thumb: 'https://images.unsplash.com/photo-1482192596544-9eb780fc7f66?q=80&w=1400&auto=format&fit=crop',
-        hero: 'https://images.unsplash.com/photo-1482192596544-9eb780fc7f66?q=80&w=1600&auto=format&fit=crop',
-        progress: 88
-      },
-      {
-        id: 'forest',
-        title: 'Whispering Woods',
-        tag: 'New Ep',
-        thumb: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1400&auto=format&fit=crop',
-        hero: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop',
-        progress: 55
       }
     ];
 
@@ -215,16 +216,39 @@
     // Option B: for the demo, we show a rotating fallback if CT isn't loaded yet.
 
     const demoBanners = [
-      'https://images.unsplash.com/photo-1526948128573-703ee1aeb6fa?q=80&w=2000&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1505685296765-3a2736de412f?q=80&w=2000&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1521295121783-8a321d551ad2?q=80&w=2000&auto=format&fit=crop'
+      // 'https://images.unsplash.com/photo-1526948128573-703ee1aeb6fa?q=80&w=2000&auto=format&fit=crop',
+      // 'https://images.unsplash.com/photo-1505685296765-3a2736de412f?q=80&w=2000&auto=format&fit=crop',
+      // 'https://images.unsplash.com/photo-1521295121783-8a321d551ad2?q=80&w=2000&auto=format&fit=crop'
     ];
-
+    
     function renderBanner(container){
+     clevertap.event.push("Web Event", {});
+          // Trigger CleverTap native display with the target div and event-based content
+      clevertap.notifications.push({
+          type: "wzrk_native_display", // Native display type
+          targetDivId: "ct-nativedisplay", // Target div for display
+      });
+
+    clevertap.event.push("t3", {});
+
+    // console.log("Henil test");
+    document.addEventListener("CT_web_native_display", function (event) {
+
+          console.log("pranjals event"+ event);
+           const data = event.detail;
+    const topic = data?.kv?.topic;
+    console.log("Received Native Display Event:", data);
+    });
+
+
       const imgSrc = demoBanners[Math.floor(Math.random()*demoBanners.length)];
       container.innerHTML = `
-        <div class="banner" id="ct-native-banner" data-clevertap-native-display>
-          <img src="${imgSrc}" alt="Featured"/>
+        <div class="banner" id="ct" data-clevertap-native-display>
+          <div id="ct-nativedisplay">
+           <img src="${imgSrc}" alt="Featured"/>
+          </div>
+
+         
           <div class="banner-overlay container">
             <div class="banner-copy">
               <h1>Tonight on OneD</h1>
@@ -290,13 +314,13 @@
       return el;
     }
 
+
     // --- Watch page ---
     function Watch(id){
       const it = byId(id) || items[0];
       const el = document.createElement('div');
       el.className = 'watch';
       el.innerHTML = `
-        <section class="player-wrap">
           <div>
             <div class="player">
               <img class="poster" src="${it.hero}" alt="${it.title}">
@@ -323,23 +347,7 @@
               <div class="scroller" id="row-more"></div>
             </section>
           </div>
-
-          <aside class="aside">
-            <div class="vstack">
-              <div class="row-title">About</div>
-              <div style="color:var(--muted)">A static demo player image with faux controls to simulate playback. Ideal for showcasing CleverTap journeys and Native Display.</div>
-            </div>
-            <div class="vstack">
-              <div class="row-title">Tags</div>
-              <div class="hstack" style="flex-wrap:wrap">
-                <span class="pill">Personalised</span>
-                <span class="pill">Recommended</span>
-                <span class="pill">Top Picks</span>
-                <span class="pill">New</span>
-              </div>
-            </div>
-          </aside>
-        </section>
+          
       `;
 
       const more = el.querySelector('#row-more');
@@ -377,6 +385,12 @@
       try{
         clevertap.event.push("Page Viewed", { page: location.search.includes('watch=') ? 'Watch' : 'Home' });
       }catch(e){ /* no-op for demo */ }
+    });
+    document.addEventListener("CT_web_native_display", function(event) {
+      console.log("pranjals event123:", event);
+       const data = event.detail;
+    const topic = data?.kv?.topic;
+    console.log("Received Native Display Event:", data);
     });
   </script>
 </body>
