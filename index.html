@@ -162,7 +162,70 @@
   </footer>
 
   <script>
-    
+     const oneDRecommended = [
+      {
+        id: 'volcano',
+        title: 'Volcano Rising',
+        tag: 'Trending',
+        thumb: 'https://house-fastly-signed-ap-southeast-1-prod.brightcovecdn.com/image/v1/static/6415628290001/54f91050-22d5-4abf-aca2-9d77e0eeb0ef/923b4975-1b94-41ee-b7ad-549e51c4f66e/640x360/match/image.jpg?fastly_token=NjhiNmZmZGNfMzA5YjI2OGU2YzZkMDNhNmQ0MzkwMmZlZDljMDNjMDE5MmRhNTQwOTM3NTcwN2NjNjc1ODJjZDUyN2MwODcxN19odHRwczovL2hvdXNlLWZhc3RseS1zaWduZWQtYXAtc291dGhlYXN0LTEtcHJvZC5icmlnaHRjb3ZlY2RuLmNvbS9pbWFnZS92MS9zdGF0aWMvNjQxNTYyODI5MDAwMS81NGY5MTA1MC0yMmQ1LTRhYmYtYWNhMi05ZDc3ZTBlZWIwZWYvOTIzYjQ5NzUtMWI5NC00MWVlLWI3YWQtNTQ5ZTUxYzRmNjZlLzY0MHgzNjAvbWF0Y2gvaW1hZ2UuanBn',
+        hero: 'https://house-fastly-signed-ap-southeast-1-prod.brightcovecdn.com/image/v1/static/6415628290001/54f91050-22d5-4abf-aca2-9d77e0eeb0ef/923b4975-1b94-41ee-b7ad-549e51c4f66e/640x360/match/image.jpg?fastly_token=NjhiNmZmZGNfMzA5YjI2OGU2YzZkMDNhNmQ0MzkwMmZlZDljMDNjMDE5MmRhNTQwOTM3NTcwN2NjNjc1ODJjZDUyN2MwODcxN19odHRwczovL2hvdXNlLWZhc3RseS1zaWduZWQtYXAtc291dGhlYXN0LTEtcHJvZC5icmlnaHRjb3ZlY2RuLmNvbS9pbWFnZS92MS9zdGF0aWMvNjQxNTYyODI5MDAwMS81NGY5MTA1MC0yMmQ1LTRhYmYtYWNhMi05ZDc3ZTBlZWIwZWYvOTIzYjQ5NzUtMWI5NC00MWVlLWI3YWQtNTQ5ZTUxYzRmNjZlLzY0MHgzNjAvbWF0Y2gvaW1hZ2UuanBn',
+        progress: 0
+      },
+      {
+        id: 'forest',
+        title: 'Mystic Forest',
+        tag: 'New',
+        thumb: 'https://cf-images.ap-southeast-1.prod.boltdns.net/v1/static/6415628290001/982802c4-fe7a-419f-a35f-4003de11f089/1bc82ec1-49b6-45dc-8543-5daf5815cab3/1280x720/match/image.jpg',
+        hero: 'https://cf-images.ap-southeast-1.prod.boltdns.net/v1/static/6415628290001/982802c4-fe7a-419f-a35f-4003de11f089/1bc82ec1-49b6-45dc-8543-5daf5815cab3/1280x720/match/image.jpg',
+        progress: 0
+      }, {
+        id: 'city',
+        title: 'Neon City',
+        tag: '4K',
+        thumb: 'https://cf-images.ap-southeast-1.prod.boltdns.net/v1/static/6415628290001/970c146c-ea2a-4ca3-9872-409f304d4142/0a55b144-639d-44ca-9185-d303f79d4b0d/1280x720/match/image.jpg',
+        hero: 'https://cf-images.ap-southeast-1.prod.boltdns.net/v1/static/6415628290001/970c146c-ea2a-4ca3-9872-409f304d4142/0a55b144-639d-44ca-9185-d303f79d4b0d/1280x720/match/image.jpg',
+        progress: 46
+      },
+      {
+        id: 'ocean',
+        title: 'Ocean Depths',
+        tag: 'Dolby',
+        thumb: 'https://cf-images.ap-southeast-1.prod.boltdns.net/v1/static/6415566492001/09e05d7f-72e8-45fe-9075-9e4dc6d34942/cdd5da80-3948-4cdd-9b96-c4f843bd2bb0/720x1280/match/image.jpg',
+        hero: 'https://cf-images.ap-southeast-1.prod.boltdns.net/v1/static/6415566492001/09e05d7f-72e8-45fe-9075-9e4dc6d34942/cdd5da80-3948-4cdd-9b96-c4f843bd2bb0/720x1280/match/image.jpg',
+        progress: 12
+      },  {
+        id: 'aurora',
+        title: 'Aurora Nights',
+        tag: 'New',
+        thumb: 'https://cf-images.ap-southeast-1.prod.boltdns.net/v1/static/6415628290001/91a7455e-f802-42ea-937f-663c67d0c852/74e8bf45-b63a-4cec-b649-c810e0b3aae9/1280x720/match/image.jpg',
+        hero: 'https://cf-images.ap-southeast-1.prod.boltdns.net/v1/static/6415628290001/91a7455e-f802-42ea-937f-663c67d0c852/74e8bf45-b63a-4cec-b649-c810e0b3aae9/1280x720/match/image.jpg',
+        progress: 72
+      },
+      {
+        id: 'sahara',
+        title: 'Sahara Drift',
+        tag: 'Trending',
+        thumb: 'https://cf-images.ap-southeast-1.prod.boltdns.net/v1/static/6415566492001/75352ca9-940c-4919-b165-5dbf20a48de9/8b26dfbc-7a2d-479f-bfa4-a4600fc3fec4/1280x720/match/image.jpg',
+        hero: 'https://cf-images.ap-southeast-1.prod.boltdns.net/v1/static/6415566492001/75352ca9-940c-4919-b165-5dbf20a48de9/8b26dfbc-7a2d-479f-bfa4-a4600fc3fec4/1280x720/match/image.jpg',
+        progress: 24
+      },
+      {
+        id: 'city',
+        title: 'Neon City',
+        tag: '4K',
+        thumb: 'https://cf-images.ap-southeast-1.prod.boltdns.net/v1/static/6415566492001/e540b649-b6d3-4f55-9408-3a8a37ffd57e/083b1408-f1ab-430e-a200-a9e08d1b94c4/1280x720/match/image.jpg',
+        hero: 'https://cf-images.ap-southeast-1.prod.boltdns.net/v1/static/6415566492001/e540b649-b6d3-4f55-9408-3a8a37ffd57e/083b1408-f1ab-430e-a200-a9e08d1b94c4/1280x720/match/image.jpg',
+        progress: 46
+      },
+      {
+        id: 'ocean',
+        title: 'Ocean Depths',
+        tag: 'Dolby',
+        thumb: 'https://cf-images.ap-southeast-1.prod.boltdns.net/v1/static/6415566492001/f9089b6b-b0d2-4c1a-9e8a-59fa82217033/8fe47e23-2304-48bd-a5a6-527e4c07dcaa/1280x720/match/image.jpg',
+        hero: 'https://cf-images.ap-southeast-1.prod.boltdns.net/v1/static/6415566492001/f9089b6b-b0d2-4c1a-9e8a-59fa82217033/8fe47e23-2304-48bd-a5a6-527e4c07dcaa/1280x720/match/image.jpg',
+        progress: 12
+      }
+    ];
     // --- Demo dataset (use any images/URLs you like) ---
     const items = [
       {
@@ -295,6 +358,11 @@
           </div>
         </div>`;
     }
+    function getRandomItems(arr, num) {
+      const shuffled = [...arr].sort(() => 0.5 - Math.random());
+      return shuffled.slice(0, num);
+    }
+
 
     // --- Home page ---
     function Home(){
@@ -338,17 +406,23 @@
       };
 
       const reco = el.querySelector('#row-reco');
+      const randomReco = getRandomItems(oneDRecommended, 4);
+
+      randomReco.forEach(it => reco.appendChild(makeCard(it)));
+
       const cont = el.querySelector('#row-continue');
       const trend = el.querySelector('#row-trending');
 
-      items.forEach((it,i)=> reco.appendChild(makeCard(it)));
+      // items.forEach((it,i)=> reco.appendChild(makeCard(it)));
       items.slice().reverse().forEach(it=> cont.appendChild(makeCard(it,true)));
       trendingItems.forEach(it => trend.appendChild(makeCard(it)));
+      // oneDRecommended.forEach(it => trend.appendChild(makeCard(it)));
 
       // items.sort((a,b)=> a.title.localeCompare(b.title)).forEach(it=> trend.appendChild(makeCard(it)));
 
       return el;
     }
+
 
 
     // --- Watch page ---
