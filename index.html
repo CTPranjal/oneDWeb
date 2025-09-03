@@ -92,20 +92,10 @@
       letter-spacing: .3px
     }
 
-    .logo {
-      width: 34px;
-      height: 34px;
-      border-radius: 10px;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      display: grid;
-      place-items: center;
-      box-shadow: var(--shadow);
-      font-size: 18px;
-      font-weight: 900
-    }
-
-    .logo span {
-      transform: translateY(-1px)
+    .brand-logo {
+      height: 40px;
+      /* adjust as needed */
+      display: block;
     }
 
     .menu {
@@ -195,7 +185,7 @@
       position: relative;
       width: 100%;
       aspect-ratio: 16/5;
-      background: var(--panel); 
+      background: var(--panel);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -209,7 +199,7 @@
     }
 
     /* Animation for CleverTap content */
-    #ct-nativedisplay > * {
+    #ct-nativedisplay>* {
       opacity: 0;
       animation: ctContentFadeIn 1.2s ease-out forwards;
     }
@@ -219,6 +209,7 @@
         opacity: 0;
         transform: scale(0.98);
       }
+
       to {
         opacity: 1;
         transform: scale(1);
@@ -226,7 +217,7 @@
     }
 
     /* Trigger fade when CleverTap injects content */
-    #ct-nativedisplay.ct-loaded > * {
+    #ct-nativedisplay.ct-loaded>* {
       animation: ctContentFadeIn 1.2s ease-out forwards;
     }
 
@@ -238,7 +229,8 @@
       justify-content: space-between;
       padding: 22px;
       background: linear-gradient(180deg, transparent, rgba(0, 0, 0, .2) 40%, rgba(0, 0, 0, .55));
-      z-index: 2; /* Ensure overlay stays on top */
+      z-index: 2;
+      /* Ensure overlay stays on top */
     }
 
     .banner-copy {
@@ -250,7 +242,7 @@
       font-size: clamp(20px, 4vw, 34px)
     }
 
-    #ct-nativedisplay > * {
+    #ct-nativedisplay>* {
       width: 100%;
       height: 100%;
     }
@@ -490,8 +482,7 @@
   <header>
     <div class="container nav">
       <a class="brand" href="./">
-        <div class="logo"><span>1D</span></div>
-        <div>OneD</div>
+        <img src="https://mms.img.susercontent.com/th-11134210-7rasf-m402b3v29rbe50" alt="OneD Logo" class="brand-logo">
       </a>
       <nav class="menu">
         <a class="active" href="#">Home</a>
@@ -527,8 +518,8 @@
         id: 'volcano',
         title: 'Volcano Rising',
         tag: 'Trending',
-        thumb: 'https://house-fastly-signed-ap-southeast-1-prod.brightcovecdn.com/image/v1/static/6415628290001/54f91050-22d5-4abf-aca2-9d77e0eeb0ef/923b4975-1b94-41ee-b7ad-549e51c4f66e/640x360/match/image.jpg?fastly_token=NjhiNmZmZGNfMzA5YjI2OGU2YzZkMDNhNmQ0MzkwMmZlZDljMDNjMDE5MmRhNTQwOTM3NTcwN2NjNjc1ODJjZDUyN2MwODcxN19odHRwczovL2hvdXNlLWZhc3RseS1zaWduZWQtYXAtc291dGhlYXN0LTEtcHJvZC5icmlnaHRjb3ZlY2RuLmNvbS9pbWFnZS92MS9zdGF0aWMvNjQxNTYyODI5MDAwMS81NGY5MTA1MC0yMmQ1LTRhYmYtYWNhMi05ZDc3ZTBlZWIwZWYvOTIzYjQ5NzUtMWI5NC00MWVlLWI3YWQtNTQ5ZTUxYzRmNjZlLzY0MHgzNjAvbWF0Y2gvaW1hZ2UuanBn',
-        hero: 'https://house-fastly-signed-ap-southeast-1-prod.brightcovecdn.com/image/v1/static/6415628290001/54f91050-22d5-4abf-aca2-9d77e0eeb0ef/923b4975-1b94-41ee-b7ad-549e51c4f66e/640x360/match/image.jpg?fastly_token=NjhiNmZmZGNfMzA5YjI2OGU2YzZkMDNhNmQ0MzkwMmZlZDljMDNjMDE5MmRhNTQwOTM3NTcwN2NjNjc1ODJjZDUyN2MwODcxN19odHRwczovL2hvdXNlLWZhc3RseS1zaWduZWQtYXAtc291dGhlYXN0LTEtcHJvZC5icmlnaHRjb3ZlY2RuLmNvbS9pbWFnZS92MS9zdGF0aWMvNjQxNTYyODI5MDAwMS81NGY5MTA1MC0yMmQ1LTRhYmYtYWNhMi05ZDc3ZTBlZWIwZWYvOTIzYjQ5NzUtMWI5NC00MWVlLWI3YWQtNTQ5ZTUxYzRmNjZlLzY0MHgzNjAvbWF0Y2gvaW1hZ2UuanBn',
+        thumb: 'https://cf-images.ap-southeast-1.prod.boltdns.net/v1/static/6415628290001/de7d3fc8-c686-4098-bbbe-7f7e274ceb08/68e8ad18-fc2a-4e14-82ef-5f9f659df57a/1280x720/match/image.jpg',
+        hero: 'https://cf-images.ap-southeast-1.prod.boltdns.net/v1/static/6415628290001/de7d3fc8-c686-4098-bbbe-7f7e274ceb08/68e8ad18-fc2a-4e14-82ef-5f9f659df57a/1280x720/match/image.jpg',
         progress: 0
       },
       {
@@ -660,7 +651,7 @@
     const q = sel => document.querySelector(sel);
     const byId = id => items.find(x => x.id === id);
 
-    function sendevent(){
+    function sendevent() {
       clevertap.event.push("OneD_pop_up");
       console.log("here?")
     }
@@ -678,74 +669,74 @@
     // Option B: for the demo, we show a rotating fallback if CT isn't loaded yet.
 
     const demoBanners = [
-    
+
     ];
 
-//     function renderBanner(container) {
-//       clevertap.event.push("Web Event", {});
-//           // Trigger CleverTap native display with the target div and event-based content
-//       clevertap.notifications.push({
-//           type: "wzrk_native_display", // Native display type
-//           targetDivId: "ct-nativedisplay", // Target div for display
-//       });
+    //     function renderBanner(container) {
+    //       clevertap.event.push("Web Event", {});
+    //           // Trigger CleverTap native display with the target div and event-based content
+    //       clevertap.notifications.push({
+    //           type: "wzrk_native_display", // Native display type
+    //           targetDivId: "ct-nativedisplay", // Target div for display
+    //       });
 
-//     clevertap.event.push("t3", {});
-    
-//   let index = 0;
+    //     clevertap.event.push("t3", {});
 
-//   function showBanner() {
-//     const imgSrc = demoBanners.length
-//       ? demoBanners[index % demoBanners.length] // loop over banners
-//       : items[0].hero;
+    //   let index = 0;
 
-//     const img = new Image();
-//     img.src = imgSrc;
-    
-//     img.onload = () => {
-//       container.innerHTML = `
-//         <div class="banner" id="ct" data-clevertap-native-display>
-//           <div id="ct-nativedisplay">
-//             <img src="${imgSrc}" alt="Featured"/>
-//           </div>
-//           <div class="banner-overlay container">
-//             <div class="banner-copy">
-//               <h1>Tonight on OneD</h1>
-//               <p>Personalised pick just for you · Powered by CleverTap Native Display</p>
-//             </div>
-//             <div class="banner-cta">
-//               <button class="btn" onclick="goToWatch('${items[0].id}')">Play</button>
-//               <a class="pill" href="#">＋ My List</a>
-//             </div>
-//           </div>
-//         </div>`;
-//     };
+    //   function showBanner() {
+    //     const imgSrc = demoBanners.length
+    //       ? demoBanners[index % demoBanners.length] // loop over banners
+    //       : items[0].hero;
 
-//     index++;
-//   }
+    //     const img = new Image();
+    //     img.src = imgSrc;
 
-//   // show first banner immediately
-//   showBanner();
+    //     img.onload = () => {
+    //       container.innerHTML = `
+    //         <div class="banner" id="ct" data-clevertap-native-display>
+    //           <div id="ct-nativedisplay">
+    //             <img src="${imgSrc}" alt="Featured"/>
+    //           </div>
+    //           <div class="banner-overlay container">
+    //             <div class="banner-copy">
+    //               <h1>Tonight on OneD</h1>
+    //               <p>Personalised pick just for you · Powered by CleverTap Native Display</p>
+    //             </div>
+    //             <div class="banner-cta">
+    //               <button class="btn" onclick="goToWatch('${items[0].id}')">Play</button>
+    //               <a class="pill" href="#">＋ My List</a>
+    //             </div>
+    //           </div>
+    //         </div>`;
+    //     };
 
-//   // rotate every 7 seconds (adjust 5000–10000 for 5–10s)
-//   setInterval(showBanner, 7000);
-// }
-    function renderBanner(container){
+    //     index++;
+    //   }
+
+    //   // show first banner immediately
+    //   showBanner();
+
+    //   // rotate every 7 seconds (adjust 5000–10000 for 5–10s)
+    //   setInterval(showBanner, 7000);
+    // }
+    function renderBanner(container) {
       clevertap.event.push("Web Event", {});
-      
+
       // Trigger CleverTap native display with the target div and event-based content
       clevertap.notifications.push({
-          type: "wzrk_native_display", // Native display type
-          targetDivId: "ct-nativedisplay", // Target div for display
+        type: "wzrk_native_display", // Native display type
+        targetDivId: "ct-nativedisplay", // Target div for display
       });
 
       clevertap.event.push("t3", {});
 
       // Listen for CleverTap native display events
       document.addEventListener("CT_web_native_display", function (event) {
-          console.log("pranjals event"+ event);
-          const data = event.detail;
-          const topic = data?.kv?.topic;
-          console.log("Received Native Display Event:", data);
+        console.log("pranjals event" + event);
+        const data = event.detail;
+        const topic = data?.kv?.topic;
+        console.log("Received Native Display Event:", data);
       });
 
       // Create banner with placeholder and persistent overlay
