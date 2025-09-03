@@ -450,7 +450,7 @@
       </a>
       <nav class="menu">
         <a class="active" href="#">Home</a>
-        <a href="#">Movies</a>
+        <a href="#" onclick="sendevent()">Movies</a>
         <a href="#">Series</a>
         <a href="#">Kids</a>
       </nav>
@@ -466,16 +466,16 @@
   <footer class="container">
     © <span id="yr"></span> OneD (Demo). For presentation use only.
   </footer>
-<script>
-            clevertap.notifications.push({
-				  "titleText":'Would you like to receive Push Notifications?',
-				  "bodyText":'We promise to only send you relevant content and give you updates on your transactions',
-				  "okButtonText":'Sign me up!',
-				  "rejectButtonText":'No thanks',
-				  "okButtonColor":'#778046',
-                  "serviceWorkerPath": 'clevertap_sw.js'
-});
-        </script>
+  <script>
+    clevertap.notifications.push({
+      "titleText": 'Would you like to receive Push Notifications?',
+      "bodyText": 'We promise to only send you relevant content and give you updates on your transactions',
+      "okButtonText": 'Sign me up!',
+      "rejectButtonText": 'No thanks',
+      "okButtonColor": '#778046',
+      "serviceWorkerPath": 'clevertap_sw.js'
+    });
+  </script>
   <script>
     const oneDRecommended = [
       {
@@ -614,6 +614,11 @@
     // Utility
     const q = sel => document.querySelector(sel);
     const byId = id => items.find(x => x.id === id);
+
+    function sendevent(){
+      clevertap.event.push("OneD_pop_up");
+      console.log("here?")
+    }
 
     function goToWatch(id) {
       const url = new URL(window.location);
