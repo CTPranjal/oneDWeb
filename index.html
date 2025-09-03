@@ -186,9 +186,48 @@
     .banner img {
       width: 100%;
       display: block;
-      aspect-ratio: 16/6;
+      /* aspect-ratio: 16/6; */
       object-fit: cover;
       filter: saturate(1.05) contrast(1.02)
+    }
+
+    #ct-nativedisplay {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/5;
+      background: var(--panel); 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    #ct-nativedisplay:empty::before {
+      content: "Loading content...";
+      opacity: 0.5;
+    }
+
+    /* Animation for CleverTap content */
+    #ct-nativedisplay > * {
+      opacity: 0;
+      animation: ctContentFadeIn 1.2s ease-out forwards;
+    }
+
+    @keyframes ctContentFadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* Trigger fade when CleverTap injects content */
+    #ct-nativedisplay.ct-loaded > * {
+      animation: ctContentFadeIn 1.2s ease-out forwards;
     }
 
     .banner-overlay {
@@ -199,6 +238,7 @@
       justify-content: space-between;
       padding: 22px;
       background: linear-gradient(180deg, transparent, rgba(0, 0, 0, .2) 40%, rgba(0, 0, 0, .55));
+      z-index: 2; /* Ensure overlay stays on top */
     }
 
     .banner-copy {
@@ -208,6 +248,11 @@
     .banner h1 {
       margin: 0 0 6px;
       font-size: clamp(20px, 4vw, 34px)
+    }
+
+    #ct-nativedisplay > * {
+      width: 100%;
+      height: 100%;
     }
 
     .banner p {
@@ -628,9 +673,7 @@
     // Option B: for the demo, we show a rotating fallback if CT isn't loaded yet.
 
     const demoBanners = [
-      // 'https://images.unsplash.com/photo-1526948128573-703ee1aeb6fa?q=80&w=2000&auto=format&fit=crop',
-      // 'https://images.unsplash.com/photo-1505685296765-3a2736de412f?q=80&w=2000&auto=format&fit=crop',
-      // 'https://images.unsplash.com/photo-1521295121783-8a321d551ad2?q=80&w=2000&auto=format&fit=crop'
+    
     ];
 
 //     function renderBanner(container) {
@@ -682,33 +725,30 @@
 //   setInterval(showBanner, 7000);
 // }
     function renderBanner(container){
-     clevertap.event.push("Web Event", {});
-          // Trigger CleverTap native display with the target div and event-based content
+      clevertap.event.push("Web Event", {});
+      
+      // Trigger CleverTap native display with the target div and event-based content
       clevertap.notifications.push({
           type: "wzrk_native_display", // Native display type
           targetDivId: "ct-nativedisplay", // Target div for display
       });
 
-    clevertap.event.push("t3", {});
+      clevertap.event.push("t3", {});
 
-    // console.log("Henil test");
-    document.addEventListener("CT_web_native_display", function (event) {
-
+      // Listen for CleverTap native display events
+      document.addEventListener("CT_web_native_display", function (event) {
           console.log("pranjals event"+ event);
-           const data = event.detail;
-    const topic = data?.kv?.topic;
-    console.log("Received Native Display Event:", data);
-    });
+          const data = event.detail;
+          const topic = data?.kv?.topic;
+          console.log("Received Native Display Event:", data);
+      });
 
-
-      const imgSrc = demoBanners[Math.floor(Math.random()*demoBanners.length)];
+      // Create banner with placeholder and persistent overlay
       container.innerHTML = `
         <div class="banner" id="ct" data-clevertap-native-display>
           <div id="ct-nativedisplay">
-           <img src="${imgSrc}" alt="Featured"/>
+            <!-- CleverTap will inject content here, placeholder shows when empty -->
           </div>
-
-         
           <div class="banner-overlay container">
             <div class="banner-copy">
               <h1>Tonight on OneD</h1>
