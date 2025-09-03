@@ -633,23 +633,82 @@
       // 'https://images.unsplash.com/photo-1521295121783-8a321d551ad2?q=80&w=2000&auto=format&fit=crop'
     ];
 
-    function renderBanner(container) {
-  let index = 0;
+//     function renderBanner(container) {
+//       clevertap.event.push("Web Event", {});
+//           // Trigger CleverTap native display with the target div and event-based content
+//       clevertap.notifications.push({
+//           type: "wzrk_native_display", // Native display type
+//           targetDivId: "ct-nativedisplay", // Target div for display
+//       });
 
-  function showBanner() {
-    const imgSrc = demoBanners.length
-      ? demoBanners[index % demoBanners.length] // loop over banners
-      : items[0].hero;
+//     clevertap.event.push("t3", {});
+    
+//   let index = 0;
 
-    const img = new Image();
-    img.src = imgSrc;
+//   function showBanner() {
+//     const imgSrc = demoBanners.length
+//       ? demoBanners[index % demoBanners.length] // loop over banners
+//       : items[0].hero;
 
-    img.onload = () => {
+//     const img = new Image();
+//     img.src = imgSrc;
+    
+//     img.onload = () => {
+//       container.innerHTML = `
+//         <div class="banner" id="ct" data-clevertap-native-display>
+//           <div id="ct-nativedisplay">
+//             <img src="${imgSrc}" alt="Featured"/>
+//           </div>
+//           <div class="banner-overlay container">
+//             <div class="banner-copy">
+//               <h1>Tonight on OneD</h1>
+//               <p>Personalised pick just for you · Powered by CleverTap Native Display</p>
+//             </div>
+//             <div class="banner-cta">
+//               <button class="btn" onclick="goToWatch('${items[0].id}')">Play</button>
+//               <a class="pill" href="#">＋ My List</a>
+//             </div>
+//           </div>
+//         </div>`;
+//     };
+
+//     index++;
+//   }
+
+//   // show first banner immediately
+//   showBanner();
+
+//   // rotate every 7 seconds (adjust 5000–10000 for 5–10s)
+//   setInterval(showBanner, 7000);
+// }
+    function renderBanner(container){
+     clevertap.event.push("Web Event", {});
+          // Trigger CleverTap native display with the target div and event-based content
+      clevertap.notifications.push({
+          type: "wzrk_native_display", // Native display type
+          targetDivId: "ct-nativedisplay", // Target div for display
+      });
+
+    clevertap.event.push("t3", {});
+
+    // console.log("Henil test");
+    document.addEventListener("CT_web_native_display", function (event) {
+
+          console.log("pranjals event"+ event);
+           const data = event.detail;
+    const topic = data?.kv?.topic;
+    console.log("Received Native Display Event:", data);
+    });
+
+
+      const imgSrc = demoBanners[Math.floor(Math.random()*demoBanners.length)];
       container.innerHTML = `
         <div class="banner" id="ct" data-clevertap-native-display>
           <div id="ct-nativedisplay">
-            <img src="${imgSrc}" alt="Featured"/>
+           <img src="${imgSrc}" alt="Featured"/>
           </div>
+
+         
           <div class="banner-overlay container">
             <div class="banner-copy">
               <h1>Tonight on OneD</h1>
@@ -661,18 +720,7 @@
             </div>
           </div>
         </div>`;
-    };
-
-    index++;
-  }
-
-  // show first banner immediately
-  showBanner();
-
-  // rotate every 7 seconds (adjust 5000–10000 for 5–10s)
-  setInterval(showBanner, 7000);
-}
-
+    }
     function getRandomItems(arr, num) {
       const shuffled = [...arr].sort(() => 0.5 - Math.random());
       return shuffled.slice(0, num);
